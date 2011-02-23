@@ -1,0 +1,38 @@
+/*
+ *      Copyright 2001-2004 Fraunhofer Gesellschaft, Munich, Germany, for its 
+ *      Fraunhofer Institute Computer Architecture and Software Technology
+ *      (FIRST), Berlin, Germany
+ *      
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+
+package org.radeox.filter;
+
+/*
+ * Typography replaces some characters with typographic entities,
+ * e.g. ... with ellipses
+ * Idea taken from MovableType/SmartyPants,
+ * see http://daringfireball.net/projects/smartypants/
+ *
+ * @author Stephan J. Schmidt
+ * @version $Id: TypographyFilter.java,v 1.5 2003/08/13 12:37:06 stephan Exp $
+ */
+
+import org.radeox.filter.regex.LocaleRegexReplaceFilter;
+
+public class TypographyFilter extends LocaleRegexReplaceFilter implements CacheFilter {
+  protected String getLocaleKey() {
+    return "filter.typography";
+  }
+}

@@ -1,0 +1,34 @@
+apply plugin: "groovy"
+
+version = "1.0"
+
+configurations {
+    optional
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def groovyDep = "org.codehaus.groovy:groovy:1.7.6"
+
+    groovy groovyDep
+
+    compile  "commons-logging:commons-logging:1.1.1"
+
+    optional "oro:oro:2.0.8", "picocontainer:picocontainer:1.2", groovyDep
+
+    testCompile "junit:junit:3.8.2", "jmock:jmock:1.2.0", "junitperf:junitperf:1.8", groovyDep
+}
+
+sourceSets {
+    main {
+        compileClasspath += configurations.optional
+    }
+    test {
+        runtimeClasspath += configurations.optional
+    }
+}
+
+test.excludes = ["**/*Support.class"]

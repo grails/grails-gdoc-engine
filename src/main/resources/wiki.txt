@@ -1,0 +1,33 @@
+{code:none}
+11:16  * stephan hates generics / templates
+11:16 < stephan> Too much hype and all I get is 
+      cast-free collections.
+11:16 < stephan> If I really need them, I just inherit one.
+11:17 < Karl> I think generics are good, it's mostly 
+      about cast-free collections
+11:18 < stephan> I think they are overhyped. They might be useful, 
+      but for very few cases. 
+      This doesn't justify making Java much more complex to
+      understand and read.
+11:18 < Karl> ah, sam showed my example
+11:18 < Karl> the int length = map.get("key").length(); not working
+11:18 < stephan> I wrote thousands of line of Java and I never had 
+      a cast problem from a collection 
+      (because I put something wrong in there)
+11:18  * jstrachan hates generics too
+11:18 < stephan> Karl: grats.
+11:18 < jstrachan> agreed
+11:19 < jstrachan> its ironic, the main use case for casting was
+      iterating through a collection
+11:19 < jstrachan> then 1.5 has a foreach thingy to avoid that case
+11:19 < stephan> yeah. exactly.
+11:19 < Karl> hehe, that's true
+11:19 < jstrachan> so most of the use cases for avoiding casting
+      with generic collections has gone away, 
+     IN THE SAME RELEASE
+11:19 < Karl> I like this use of generics:
+11:19 < stephan> thats so funny.
+11:19 < jstrachan> so hey, we have 2 solutions for the price of 
+      one :)
+{code}
+
