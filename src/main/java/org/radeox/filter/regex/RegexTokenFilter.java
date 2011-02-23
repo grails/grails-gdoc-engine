@@ -14,6 +14,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ *
+ *  Additional changes to original Radeox code by:
+ *
+ *    Peter Ledbrook, SpringSource
  */
 
 
@@ -88,7 +93,8 @@ public abstract class RegexTokenFilter extends RegexFilter {
 
         // result = Util.substitute(matcher, p, new ActionSubstitution(s, this, context), result, limit);
       } catch (Exception e) {
-        log.warn("<span class=\"error\">Exception</span>: " + this + " (" + input + ")", e);
+        log.warn("<span class=\"error\">Exception</span>: " + this, e);
+        log.debug("Input that caused the exception:\n" + input);
       } catch (Error err) {
         log.warn("<span class=\"error\">Error</span>: " + this + ": " + err);
         err.printStackTrace();

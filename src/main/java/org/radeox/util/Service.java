@@ -51,12 +51,8 @@ public class Service {
     ClassLoader classLoader = cls.getClassLoader();
     String providerFile = "META-INF/services/" + cls.getName();
 
-    System.out.println(">> Provider file: " + providerFile);
-
     // check whether we already loaded the provider classes
     List providers = (List) services.get(providerFile);
-
-    System.out.println(">> Providers: " + providers);
     if (providers != null) {
       return providers.iterator();
     }
