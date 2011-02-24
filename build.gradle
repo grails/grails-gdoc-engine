@@ -1,8 +1,11 @@
 apply plugin: "groovy"
+apply plugin: "maven"
 
-version = "1.0"
+group = "org.grails"
+version = "1.0-SNAPSHOT"
 
 configurations {
+    deployerJars
     optional
 }
 
@@ -15,11 +18,13 @@ dependencies {
 
     groovy groovyDep
 
-    compile  "commons-logging:commons-logging:1.1.1"
+    compile  "org.slf4j:jcl-over-slf4j:1.6.1"
 
     optional "oro:oro:2.0.8", "picocontainer:picocontainer:1.2", groovyDep
 
     testCompile "junit:junit:3.8.2", "jmock:jmock:1.2.0", "junitperf:junitperf:1.8", groovyDep
+
+    deployerJars "org.apache.maven.wagon:wagon-webdav-jackrabbit:1.0-beta-7"
 }
 
 sourceSets {
@@ -32,3 +37,17 @@ sourceSets {
 }
 
 test.excludes = ["**/*Support.class"]
+
+uploadArchives {
+    repositories.mavenDeployer {
+        name = 'webdavDeployer'
+        configuration = configurations.deployerJars
+        repository(url: "dav:https://dav.codehaus.org/repository/grails/") {
+            authentication userName: codehausUsername, password: codehausPassword
+        }
+        snapshotRepository(url: "dav:https://dav.codehaus.org/snapshots.repository/grails/") {
+            authentication userName: codehausUsername, password: codehausPassword
+        }
+    }
+}
+
