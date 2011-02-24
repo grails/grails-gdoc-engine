@@ -14,6 +14,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ *
+ *  Additional changes to original Radeox code by:
+ *
+ *    Peter Ledbrook, SpringSource
  */
 
 
@@ -23,7 +28,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.*;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -50,7 +55,7 @@ public class ApiDoc {
   }
 
   public ApiDoc() {
-    apiDocs = new HashMap();
+    apiDocs = new LinkedHashMap();
 
     boolean fileNotFound = false;
     try {

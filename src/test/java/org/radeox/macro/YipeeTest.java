@@ -14,6 +14,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ *
+ *  Additional changes to original Radeox code by:
+ *
+ *    Peter Ledbrook, SpringSource
  */
 
 package org.radeox.macro;
@@ -32,6 +37,6 @@ public class YipeeTest extends MacroTestSupport {
 
   public void testYipee() {
     String result = engine.render("{yipee}", context);
-    assertEquals("Yipee ay ey", result);
+    assertEquals("{yipee}", result);
   }
 }
