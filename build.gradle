@@ -2,7 +2,7 @@ apply plugin: "groovy"
 apply plugin: "maven"
 
 group = "org.grails"
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 configurations {
     deployerJars
@@ -23,8 +23,6 @@ dependencies {
     optional "oro:oro:2.0.8", "picocontainer:picocontainer:1.2", groovyDep
 
     testCompile "junit:junit:3.8.2", "jmock:jmock:1.2.0", "junitperf:junitperf:1.8", groovyDep
-
-    deployerJars "org.apache.maven.wagon:wagon-webdav-jackrabbit:1.0-beta-7"
 }
 
 sourceSets {
@@ -39,15 +37,19 @@ sourceSets {
 test.excludes = ["**/*Support.class"]
 
 uploadArchives {
+    final url = project.version.endsWith("SNAPSHOT") ? "http://repo.grails.org/grails/libs-snapshots-local" :
+                                                       "http://repo.grails.org/grails/libs-releases-local"
     repositories.mavenDeployer {
-        name = 'webdavDeployer'
-        configuration = configurations.deployerJars
-        repository(url: "dav:https://dav.codehaus.org/repository/grails/") {
-            authentication userName: codehausUsername, password: codehausPassword
-        }
-        snapshotRepository(url: "dav:https://dav.codehaus.org/snapshots.repository/grails/") {
-            authentication userName: codehausUsername, password: codehausPassword
-        }
+      repository(url: url) {
+          final username = project.properties["artifactoryPublishUsername"]
+          final password = project.properties["artifactoryPublishPassword"]
+
+          if(username && password) {
+            org.apache.ivy.util.url.CredentialsStore.INSTANCE.addCredentials("Artifactory Realm", "repo.grails.org", username, password);
+          }
+
+          authentication(userName: username, password: password)
+      }
     }
 }
 
