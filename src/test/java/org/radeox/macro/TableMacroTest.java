@@ -61,4 +61,9 @@ public class TableMacroTest extends MacroTestSupport {
     assertEquals("<table class=\"wiki-table\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><th>1</th><th>2</th></tr><tr class=\"table-odd\"><td>4</td><td>2.5</td></tr></table>", result);
   }
 
+	/*public void testDoubleLinks() {
+    String result = engine.render("{table}1|2\nlink|[here|http://grails.org] [hereAlso|http://grails.org]{table}", context);
+    assertEquals("<table class=\"wiki-table\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><th>1</th><th>2</th></tr><tr class=\"table-odd\"><td>link</td><td><span class=\"nobr\"><a href=\"http://grails.org\">here</a></span> <span class=\"nobr\"><a href=\"http://grails.org\">hereAlso</a></span></td></tr></table>", result);
+  }*/
+
 }
