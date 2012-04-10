@@ -49,7 +49,10 @@ public class CodeMacro extends LocalePreserved {
   private Map formatters;
   private FilterContext nullContext = new BaseFilterContext();
 
-  private String start;
+  private String outerStart;
+  private String innerStart;
+  private String titleStart;
+  private String titleEnd;
   private String end;
 
   public String getLocaleKey() {
@@ -62,8 +65,11 @@ public class CodeMacro extends LocalePreserved {
     String outputName = (String) context.get(RenderContext.OUTPUT_BUNDLE_NAME);
     ResourceBundle outputMessages = ResourceBundle.getBundle(outputName, outputLocale);
 
-    start = outputMessages.getString(getLocaleKey() + ".start");
+    outerStart = outputMessages.getString(getLocaleKey() + ".outer.start");
+    innerStart = outputMessages.getString(getLocaleKey() + ".inner.start");
     end = outputMessages.getString(getLocaleKey() + ".end");
+    titleStart = outputMessages.getString(getLocaleKey() + ".title.start");
+    titleEnd = outputMessages.getString(getLocaleKey() + ".title.end");
   }
 
   public CodeMacro() {
@@ -116,7 +122,13 @@ public class CodeMacro extends LocalePreserved {
 
     String result = formatter.filter(params.getContent(), nullContext);
 
-    writer.write(start);
+    writer.write(outerStart);
+    if (params.get("title")!=null) {
+      writer.write(titleStart);
+      writer.write(params.get("title"));
+      writer.write(titleEnd);
+    }
+    writer.write(innerStart);
     writer.write(replace(result.trim()));
     writer.write(end);
     return;
